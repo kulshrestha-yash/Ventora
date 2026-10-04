@@ -2,6 +2,20 @@
 // Swappable localStorage data adapter for Ventora (MongoDB-shaped collections)
 
 const PREFIX = "ventora:v1:";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+
+// Mirror every change to MongoDB. Fire-and-forget: if the server is off, the app still works.
+function syncToServer(collection, payload) {
+  try {
+    fetch(`${API_URL}/api/sync/${collection}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  } catch {
+    // ignore
+  }
+}
 
 export const COLLECTIONS = [
   "users",
@@ -101,6 +115,7 @@ export function insert(collection, doc) {
   };
   docs.push(newDoc);
   write(collection, docs);
+  syncToServer(collection, { op: "upsert", docs: [newDoc] });
   return newDoc;
 }
 
@@ -116,6 +131,7 @@ export function updateOne(collection, _id, patch) {
   };
   docs[index] = updatedDoc;
   write(collection, docs);
+  syncToServer(collection, { op: "upsert", docs: [updatedDoc] });
   return updatedDoc;
 }
 
@@ -123,6 +139,7 @@ export function remove(collection, _id) {
   const docs = read(collection);
   const filtered = docs.filter((d) => d._id !== _id);
   write(collection, filtered);
+  syncToServer(collection, { op: "remove", id: _id });
   return true;
 }
 
