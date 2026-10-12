@@ -47,7 +47,7 @@ export const INVESTOR_TYPES = [
   "Other"
 ];
 
-// Token economics rules — future admin-configurable (spec §6.8, §8.4)
+// Token economics rules
 export const TOKENS = {
   STARTING_GRANT: 10,
   REQUEST_COST: 1,

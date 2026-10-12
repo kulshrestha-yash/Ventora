@@ -1,4 +1,3 @@
-// src/components/ui/FormControls.jsx
 import React, { forwardRef } from "react";
 
 export const Input = forwardRef(function Input(
@@ -8,11 +7,10 @@ export const Input = forwardRef(function Input(
   return (
     <input
       ref={ref}
-      className={`w-full h-10 px-3 py-2 text-sm bg-surface border rounded-lg transition-colors placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-        error
+      className={`w-full h-10 px-3 py-2 text-sm bg-surface border rounded-lg transition-colors placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-primary/20 ${error
           ? "border-danger focus:border-danger focus:ring-danger/20"
           : "border-line focus:border-primary"
-      } ${className}`}
+        } ${className}`}
       {...props}
     />
   );
@@ -25,11 +23,10 @@ export const Textarea = forwardRef(function Textarea(
   return (
     <textarea
       ref={ref}
-      className={`w-full p-3 text-sm bg-surface border rounded-lg transition-colors placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-primary/20 leading-relaxed ${
-        error
+      className={`w-full p-3 text-sm bg-surface border rounded-lg transition-colors placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-primary/20 leading-relaxed ${error
           ? "border-danger focus:border-danger focus:ring-danger/20"
           : "border-line focus:border-primary"
-      } ${className}`}
+        } ${className}`}
       {...props}
     />
   );
@@ -42,11 +39,10 @@ export const Select = forwardRef(function Select(
   return (
     <select
       ref={ref}
-      className={`w-full h-10 px-3 py-2 text-sm bg-surface border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer ${
-        error
+      className={`w-full h-10 px-3 py-2 text-sm bg-surface border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer ${error
           ? "border-danger focus:border-danger focus:ring-danger/20"
           : "border-line focus:border-primary"
-      } ${className}`}
+        } ${className}`}
       {...props}
     >
       {children}

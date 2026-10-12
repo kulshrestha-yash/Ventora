@@ -1,87 +1,45 @@
-// src/context/AuthContext.jsx
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { api } from "../lib/api.js";
+import React, { createContext, useContext, useState, useEffect } from 'react'
+import { api } from '../lib/api.js'
 
-const AuthContext = createContext(null);
+const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const refreshUser = useCallback(async () => {
-    try {
-      const current = await api.auth.me();
-      setUser(current);
-      return current;
-    } catch (err) {
-      console.error("Auth check failed:", err);
-      setUser(null);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    refreshUser();
+    api.me().then(u => {
+      setUser(u)
+      setLoading(false)
+    })
+  }, [])
 
-    // Listen for auth-related broadcast events
-    const handleAuthEvent = () => {
-      refreshUser();
-    };
+  async function login(credentials) {
+    const u = await api.login(credentials)
+    setUser(u)
+    return u
+  }
 
-    window.addEventListener("ventora:auth", handleAuthEvent);
-    window.addEventListener("ventora:db", handleAuthEvent);
-    window.addEventListener("storage", handleAuthEvent);
+  async function signup(data) {
+    const u = await api.signup(data)
+    setUser(u)
+    return u
+  }
 
-    return () => {
-      window.removeEventListener("ventora:auth", handleAuthEvent);
-      window.removeEventListener("ventora:db", handleAuthEvent);
-      window.removeEventListener("storage", handleAuthEvent);
-    };
-  }, [refreshUser]);
-
-  const login = async ({ email, password }) => {
-    const res = await api.auth.login({ email, password });
-    setUser(res.user);
-    return res.user;
-  };
-
-  const signup = async ({ role, name, email, password }) => {
-    const res = await api.auth.signup({ role, name, email, password });
-    setUser(res.user);
-    return res.user;
-  };
-
-  const logout = async () => {
-    await api.auth.logout();
-    setUser(null);
-  };
+  function logout() {
+    api.logout()
+    setUser(null)
+  }
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        signup,
-        logout,
-        refreshUser,
-        isAuthenticated: !!user,
-        isInnovator: user?.role === "innovator",
-        isInvestor: user?.role === "investor",
-        isVerifiedInvestor: user?.role === "investor" && user?.kyc?.status === "verified"
-      }}
-    >
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be inside AuthProvider')
+  return ctx
 }

@@ -1,5 +1,3 @@
-// src/lib/db/localStorageStore.js
-// Swappable localStorage data adapter for Ventora (MongoDB-shaped collections)
 
 const PREFIX = "ventora:v1:";
 

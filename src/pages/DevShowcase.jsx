@@ -47,7 +47,7 @@ export function DevShowcase() {
       <div className="flex items-center justify-between pb-6 border-b border-line">
         <div>
           <h1 className="text-2xl font-bold text-ink">Ventora UI Component Showcase</h1>
-          <p className="text-xs text-ink-muted">Development testbed for all design system primitives (§5.3)</p>
+          <p className="text-xs text-ink-muted">Development testbed for all design system primitives</p>
         </div>
         <Link to="/" className="text-xs font-semibold text-primary hover:underline">
           ← Back to Home

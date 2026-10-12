@@ -1,5 +1,5 @@
 // src/lib/ai/completenessEngine.js
-// Pure, deterministic AI Idea Completeness Engine (spec §8.1)
+// Deterministic AI Idea Completeness Engine
 
 import { SCORING_SECTIONS } from "./scoringConfig.js";
 import { FEEDBACK_TIPS } from "./feedbackTips.js";
@@ -75,7 +75,7 @@ export function analyzeIdea(idea) {
         }
       } else if (key === "fundingUse") {
         if (notRaising) {
-          // Spec §8.1.2: if funding.amount === 0 (not raising), score strong if >= minWords, else partial
+          // If not raising (funding.amount === 0): score strong if >= minWords, else partial
           points = words >= minWords ? 100 : 65;
           penalty = 0;
         } else if (!/\d/.test(rawText)) {

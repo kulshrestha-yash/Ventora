@@ -1,4 +1,3 @@
-// src/pages/Profile.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppShell } from "../components/layout/AppShell.jsx";
@@ -269,11 +268,10 @@ export function Profile() {
                         key={ind}
                         type="button"
                         onClick={() => toggleItem(selectedIndustries, setSelectedIndustries, ind)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                          active
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${active
                             ? "bg-primary text-white shadow-sm"
                             : "bg-surface border border-line text-ink-secondary hover:bg-surface-subtle"
-                        }`}
+                          }`}
                       >
                         {ind}
                       </button>
@@ -295,11 +293,10 @@ export function Profile() {
                         key={stg}
                         type="button"
                         onClick={() => toggleItem(selectedStages, setSelectedStages, stg)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                          active
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${active
                             ? "bg-primary text-white shadow-sm"
                             : "bg-surface border border-line text-ink-secondary hover:bg-surface-subtle"
-                        }`}
+                          }`}
                       >
                         {stg}
                       </button>
@@ -357,11 +354,10 @@ export function Profile() {
                             }
                           }
                         }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                          active
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${active
                             ? "bg-primary text-white shadow-sm"
                             : "bg-surface border border-line text-ink-secondary hover:bg-surface-subtle"
-                        }`}
+                          }`}
                       >
                         {m}
                       </button>
@@ -387,7 +383,7 @@ export function Profile() {
           </div>
 
           <p className="text-xs text-ink-secondary leading-relaxed">
-            All data in this MVP is persisted locally in your browser under the <code className="bg-surface-subtle px-1.5 py-0.5 rounded font-mono text-ink">ventora:v1:</code> namespace. You can sign out or perform a complete demo reset.
+            All platform data is persisted in your browser under the <code className="bg-surface-subtle px-1.5 py-0.5 rounded font-mono text-ink">ventora:v1:</code> namespace. You can sign out or reset local data.
           </p>
 
           <div className="flex flex-wrap items-center justify-between gap-4 pt-2">

@@ -1,5 +1,5 @@
 // src/lib/matching.js
-// Personalized Investor Feed matching and ranking algorithm (spec §8.2)
+// Personalized Investor Feed matching and ranking algorithm
 
 /**
  * Calculates match percentage between an idea and an investor's preferences.

@@ -13,7 +13,7 @@ export function DataProvider({ children }) {
   const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
   const [onlineUsers, setOnlineUsers] = useState({});
 
-  // Presence channel (same-browser live presence per spec §8.6)
+  // Presence channel for same-browser live presence (BroadcastChannel)
   useEffect(() => {
     if (!user?._id) return;
 

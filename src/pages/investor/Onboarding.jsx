@@ -193,7 +193,7 @@ export function Onboarding() {
             <div className="p-3.5 rounded-lg bg-surface-subtle border border-line text-xs text-ink-secondary flex items-start gap-2.5">
               <ShieldCheck className="w-4 h-4 text-success shrink-0 mt-0.5" />
               <span>
-                <strong>Academic Prototype Note:</strong> This platform uses a simulated mock verification flow. No real government IDs or sensitive documents are uploaded to external servers.
+                <strong>Verification Note:</strong> This platform uses an automated simulated verification flow. No real sensitive documents are uploaded to external servers.
               </span>
             </div>
 

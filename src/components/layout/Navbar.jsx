@@ -100,7 +100,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ink-muted">
         <div className="flex items-center gap-2">
           <span className="font-bold tracking-widest text-ink">VENTORA</span>
-          <span>— academic project (AKTU CSIT)</span>
+          <span>— Innovator & Investor Network</span>
         </div>
         <div className="text-center md:text-right">
           <p className="font-medium text-ink-secondary">

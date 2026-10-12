@@ -1,5 +1,5 @@
 // src/lib/disclosure.js
-// Controlled disclosure and identity masking module (spec §6.9, §8.3)
+// Controlled disclosure and identity masking module
 
 /**
  * Returns strictly the whitelisted teaser fields for public/feed display.
@@ -61,7 +61,7 @@ export function displayNameFor(targetUser, viewerId, hasAcceptedRelation = false
 }
 
 /**
- * Section visibility defaults per spec §8.3.2
+ * Section visibility defaults — controls which idea fields are public vs. locked behind acceptance
  */
 export const DEFAULT_VISIBILITY = {
   problem: "public",
