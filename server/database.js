@@ -10,6 +10,15 @@ const userSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User', userSchema)
 
+const ideaSchema = new mongoose.Schema({
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  title: { type: String, required: true, trim: true, maxlength: 80 },
+  pitch: { type: String, required: true, trim: true, maxlength: 300 },
+  createdAt: { type: Date, default: Date.now }
+})
+
+export const Idea = mongoose.model('Idea', ideaSchema)
+
 export async function connectDatabase() {
   const uri = process.env.MONGODB_URI
   if (!uri) throw new Error('MONGODB_URI is not set in the .env file.')

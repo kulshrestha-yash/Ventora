@@ -13,6 +13,13 @@ function RequireAuth({ children }) {
   return user ? children : <Navigate to="/login" replace />
 }
 
+function RequireRole({ role, children }) {
+  const { user, loading } = useAuth()
+  if (loading) return null
+  if (!user) return <Navigate to="/login" replace />
+  return user.role === role ? children : <Navigate to={user.role === 'innovator' ? '/dashboard' : '/feed'} replace />
+}
+
 function PublicOnly({ children }) {
   const { user, loading } = useAuth()
   if (loading) return null
@@ -24,8 +31,8 @@ export function App() {
     <Routes>
       <Route path="/login" element={<PublicOnly><Login /></PublicOnly>} />
       <Route path="/signup" element={<PublicOnly><Signup /></PublicOnly>} />
-      <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
-      <Route path="/feed" element={<RequireAuth><Feed /></RequireAuth>} />
+      <Route path="/dashboard" element={<RequireRole role="innovator"><Dashboard /></RequireRole>} />
+      <Route path="/feed" element={<RequireRole role="investor"><Feed /></RequireRole>} />
       <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>

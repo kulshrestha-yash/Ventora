@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:5001/api'
+const BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
 
 function getToken() {
   return localStorage.getItem('ventora:token')
@@ -21,7 +21,7 @@ async function request(path, options = {}) {
     throw new Error(`Cannot reach the API at ${BASE}. Start it with "npm run server" and check the terminal for database errors.`)
   }
 
-  const data = await res.json()
+  const data = await res.json().catch(() => ({}))
   if (!res.ok) {
     const err = new Error(data.error || 'Request failed')
     err.code = data.code
@@ -62,5 +62,14 @@ export const api = {
 
   logout() {
     localStorage.removeItem('ventora:token')
+  },
+
+  ideas: {
+    async create({ title, pitch }) {
+      return request('/ideas', { method: 'POST', body: JSON.stringify({ title, pitch }) })
+    },
+    async list() {
+      return request('/ideas')
+    }
   }
 }
