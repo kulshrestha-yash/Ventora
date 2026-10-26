@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import dns from 'node:dns'
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -22,6 +23,9 @@ export const Idea = mongoose.model('Idea', ideaSchema)
 export async function connectDatabase() {
   const uri = process.env.MONGODB_URI
   if (!uri) throw new Error('MONGODB_URI is not set in the .env file.')
+
+  const dnsServers = process.env.MONGODB_DNS_SERVERS?.split(',').map(server => server.trim()).filter(Boolean)
+  if (dnsServers?.length) dns.setServers(dnsServers)
 
   console.log('Connecting to MongoDB...')
 
